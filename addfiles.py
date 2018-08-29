@@ -18,6 +18,10 @@ res2['chng30'] = (res2['30Price'] - res2['30Price'].shift(-1))/res2['30Price']
 res2['chng10'] = (res2['10Price'] - res2['10Price'].shift(-1))/res2['10Price'] 
 res2['chng5'] = (res2['5Price'] - res2['5Price'].shift(-1))/res2['5Price'] 
 #res2['5/10'] = (res2['chng5'].rolling(25).std() * math.sqrt(252)*100)/(res2['chng10'].rolling(25).std() * math.sqrt(252)*100)
-res2['5vol'] = (res2['chng5'].rolling(5).std() * math.sqrt(252)*100)
-res2['5/10'] = (res2['chng5'].rolling(5).std() * math.sqrt(252)*100)/(res2['chng10'].rolling(5).std() * math.sqrt(252)*100)
+res2['10vol'] = (res2['chng10'].rolling(25).std() * math.sqrt(252)*100)
+res2['5/10'] = (res2['chng5'].rolling(25).std() * math.sqrt(252)*100)/(res2['chng10'].rolling(25).std() * math.sqrt(252)*100)
 print(res2.head(40))
+res2.fillna(0)
+x=res2.iloc[27:2500]
+plt.plot(res2['10vol'])
+plt.show() 
