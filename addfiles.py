@@ -11,7 +11,8 @@ def addcol(dtf,years):
 
 def histvoldays(dtf,daynum,years):
     yr = str(years)
-    addcl = yr + "vol"
+    dnm = str(daynum)
+    addcl = yr + "vol" + dnm
     chngcol = "chng" + yr
     dtf[addcl] = (res2[chngcol].rolling(daynum).std() * math.sqrt(252)*100)
     dtf[addcl] = dtf[addcl].shift(-daynum)
@@ -33,10 +34,14 @@ res2 = addcol(res2,30)
 res2 = addcol(res2,10)
 res2 = addcol(res2,5)
 #res2['5/10'] = (res2['chng5'].rolling(25).std() * math.sqrt(252)*100)/(res2['chng10'].rolling(25).std() * math.sqrt(252)*100)
-res2 = histvoldays(res2,5,10)
+xdys = input("Input days  ")
+res2 = histvoldays(res2,int(xdys),10)
 #res2['5/10'] = (res2['chng5'].rolling(25).std() * math.sqrt(252)*100)/(res2['chng10'].rolling(25).std() * math.sqrt(252)*100)
-print(res2.head(40))
+#print(res2.head(40))
 res2.fillna(0)
+#pick range to graph
 x=res2.iloc[0:25]
-plt.plot(x['10vol'])
+
+daysofhist = "10vol"+xdys
+plt.plot(x[daysofhist])
 plt.show() 
