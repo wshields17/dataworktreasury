@@ -35,13 +35,16 @@ res2 = addcol(res2,10)
 res2 = addcol(res2,5)
 #res2['5/10'] = (res2['chng5'].rolling(25).std() * math.sqrt(252)*100)/(res2['chng10'].rolling(25).std() * math.sqrt(252)*100)
 xdys = input("Input days  ")
-res2 = histvoldays(res2,int(xdys),10)
+xcontract = input('Input contract number')
+res2 = histvoldays(res2,int(xdys),int(xcontract))
 #res2['5/10'] = (res2['chng5'].rolling(25).std() * math.sqrt(252)*100)/(res2['chng10'].rolling(25).std() * math.sqrt(252)*100)
 #print(res2.head(40))
 res2.fillna(0)
 #pick range to graph
-x=res2.iloc[0:25]
+x=res2.iloc[0:2900]
 
-daysofhist = "10vol"+xdys
+daysofhist = xcontract+"vol"+xdys
 plt.plot(x[daysofhist])
+plt.ylabel('Vol')
+plt.xlabel('Days ago')
 plt.show() 
